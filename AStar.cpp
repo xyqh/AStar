@@ -75,7 +75,9 @@ public:
         // 存储此处的节点信息
         std::vector<std::vector<Point*>> visited(m, std::vector<Point*>(n, nullptr));
 
+        // 当前点能去的下一个点相对当前点的偏移和附加g值
         int around[8][3] = {{-1,0,10},{-1,1,14},{0,1,10},{1,1,14},{1,0,10},{1,-1,14},{0,-1,10},{-1,-1,14}};// 左 左上 上 右上 右 右下 下 左下
+        // int around[4][3] = {{-1,0,10},{0,1,10},{1,0,10},{0,-1,10}};// 左 上 右 下
         
         int g = 0, h = (*begin - *end) * 10;
         int f = g + h;
@@ -141,7 +143,7 @@ public:
             }
             path.push_back(p);
 
-            std::cout << "p: " << p->x << " " << p->y << std::endl;
+            // std::cout << "p: " << p->x << " " << p->y << std::endl;
             if(*p == *begin){
                 std::reverse(path.begin(), path.end());
                 return path;
@@ -167,15 +169,15 @@ int main(){
     std::vector<std::vector<int>> arr =
     {
         {0,0,0,0,0,0,0,0},
-        {0,0,0,0,1,0,0,0},
-        {0,0,0,0,1,0,0,0},
-        {0,0,0,0,1,0,0,0},
+        {0,0,0,0,1,1,1,0},
+        {0,0,0,0,1,0,1,0},
+        {0,0,0,0,1,0,1,0},
         {0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0},
     };
  
     Point* s = new Point(1, 1);
-    Point* e = new Point(2, 6);
+    Point* e = new Point(2, 5);
 
     AStar as;
     std::vector<Point*> ans = as(arr, s, e);
